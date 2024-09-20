@@ -9,6 +9,8 @@ import { adsService } from '@/services/AdsService.js';
 
 const posts = computed(() => AppState.posts)
 
+const ads = computed(() => AppState.ads)
+
 onMounted(() => {
   getAllPosts()
 })
@@ -46,9 +48,9 @@ async function getAllPosts() {
       <div class="col-md-10" v-for="post in posts" :key="post.id">
         <PostCard :postProp="post" />
       </div>
-      <!-- <div class="col-md-2" v-for="ad in ads" :key="ad.id"> -->
-      <!-- <AdCard :adProp="ad" /> -->
-      <!-- </div> -->
+      <div class="col-md-2" v-for="ad in ads" :key="ad.title">
+        <!-- <AdCard :adProp="ad" /> -->
+      </div>
     </section>
   </div>
 </template>
