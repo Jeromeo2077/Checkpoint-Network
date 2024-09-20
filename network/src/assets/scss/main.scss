@@ -6,6 +6,12 @@ body {
   overscroll-behavior: none;
 }
 
+.merriweather-light {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -20,4 +26,3 @@ main {
 a {
   text-decoration: none;
 }
-
