@@ -10,7 +10,7 @@ defineProps({
 
 <template>
   <div class="card box-shadow  m-3">
-    <h5 class="card-name m-1">{{ postProp.creator.name }}</h5>
+    <h5 class="card-name m-1"> {{ postProp.creator.name }}</h5>
     <h6 class="mb-3">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
       postProp.createdAt.toLocaleTimeString() }}</h6>
     <p class="card-text">{{ postProp.body.slice(0, 300) }}</p>
