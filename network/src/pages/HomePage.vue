@@ -43,10 +43,10 @@ async function getAllPosts() {
   <div class="container">
     <section class="row">
       <h1 class="m-3">Recent Posts</h1>
-      <div class="col-10" v-for="post in posts" :key="post.id">
+      <div class="col-md-10" v-for="post in posts" :key="post.id">
         <PostCard :postProp="post" />
       </div>
-      <!-- <div class="col-2" v-for="ad in ads" :key="ad.id"> -->
+      <!-- <div class="col-md-2" v-for="ad in ads" :key="ad.id"> -->
       <!-- <AdCard :adProp="ad" /> -->
       <!-- </div> -->
     </section>
