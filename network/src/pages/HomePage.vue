@@ -1,5 +1,24 @@
 <script setup>
+import { onMounted } from 'vue';
+import Pop from '@/utils/Pop.js';
+import { logger } from '@/utils/Logger.js';
+import { postsService } from '@/services/PostsService.js';
 
+
+onMounted(() => {
+  getAllPosts()
+})
+
+
+async function getAllPosts() {
+  try {
+    await postsService.getAllPosts()
+  }
+  catch (error) {
+    Pop.error(error);
+    logger.error(error)
+  }
+}
 </script>
 
 <template>
