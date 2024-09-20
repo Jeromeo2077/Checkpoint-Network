@@ -1,9 +1,11 @@
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import Pop from '@/utils/Pop.js';
 import { logger } from '@/utils/Logger.js';
 import { postsService } from '@/services/PostsService.js';
+import { AppState } from '@/AppState.js';
 
+const posts = computed(() => AppState.posts)
 
 onMounted(() => {
   getAllPosts()
@@ -24,7 +26,7 @@ async function getAllPosts() {
 <template>
   <div class="container">
     <section class="row">
-
+      {{ posts }}
     </section>
   </div>
 </template>
