@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+// eslint-disable-next-line no-unused-vars
 import { Post } from './models/Post.js'
 
 // NOTE AppState is a reactive object to contain app level data
