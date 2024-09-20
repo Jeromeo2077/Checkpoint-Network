@@ -27,31 +27,14 @@ async function getAllPosts() {
 <template>
   <div class="container">
     <section class="row">
-      <div v-for="post in posts" :key="post.id">
+      <div class="col-10" v-for="post in posts" :key="post.id">
         <PostCard :postProp="post" />
+      </div>
+      <div class="col-2" v-for="post in posts" :key="post.id">
+        <!-- <PostCard :postProp="post" /> -->
       </div>
     </section>
   </div>
 </template>
 
-<style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
