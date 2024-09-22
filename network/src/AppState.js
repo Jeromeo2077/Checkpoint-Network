@@ -13,6 +13,8 @@ export const AppState = reactive({
   /** @type {Post[]} */
   posts: [],
   /** @type {Ad[]} */
-  ads: []
+  ads: [],
+ 
+  activeProfile: null
 })
 
