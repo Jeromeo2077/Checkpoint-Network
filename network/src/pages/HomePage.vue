@@ -6,10 +6,13 @@ import { postsService } from '@/services/PostsService.js';
 import { AppState } from '@/AppState.js';
 import PostCard from '@/components/globals/PostCard.vue';
 import { adsService } from '@/services/AdsService.js';
+import { accountService } from '@/services/AccountService.js';
 
 const posts = computed(() => AppState.posts)
 
 const ads = computed(() => AppState.ads)
+
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   getAllPosts()
@@ -18,6 +21,20 @@ onMounted(() => {
 onMounted(() => {
   getAds()
 })
+
+onMounted(() => {
+  getAccount()
+})
+
+async function getAccount() {
+  try {
+    await accountService.getAccount
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 async function getAds() {
   try {
