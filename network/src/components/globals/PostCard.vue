@@ -1,6 +1,8 @@
 <script setup>
 import { Post } from '@/models/Post.js';
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 
 defineProps({
   postProp: { type: Post, required: true }
@@ -13,9 +15,11 @@ defineProps({
   <div class="card box-shadow  m-3">
     <div class="d-flex justify-content-between">
       <h5 class="card-name m-2"> {{ postProp.creator.name }}</h5>
-      <div>
-        <img class="profile-img m-1" :src="postProp.creator.picture" :alt="postProp.creator.name">
-      </div>
+      <router-link v-if="route.name == 'Home'"
+        :to="{ name: 'ProfileDetails', params: { profileId: postProp.creatorId } }"
+        :title="`Visit ${postProp.creator.name}'s Profile Page!`">
+        <img class="profile-img m-2" :src="postProp.creator.picture" :alt="postProp.creator.name">
+      </router-link>
     </div>
     <div class="d-flex">
       <h6 class="mb-3">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
