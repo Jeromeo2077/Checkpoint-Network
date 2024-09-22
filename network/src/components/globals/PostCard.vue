@@ -5,6 +5,7 @@ import { Post } from '@/models/Post.js';
 defineProps({
   postProp: { type: Post, required: true }
 })
+
 </script>
 
 
@@ -19,7 +20,7 @@ defineProps({
     <div class="d-flex">
       <h6 class="mb-3">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
         postProp.createdAt.toLocaleTimeString() }}</h6>
-      <i class="mdi mdi-heart-outline mx-3"></i>
+      <i class="mdi mdi-heart-outline mx-3">{{ postProp.likes.length }}</i>
 
     </div>
     <p class="card-text">{{ postProp.body.slice(0, 300) }}</p>
