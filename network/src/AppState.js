@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import { Post } from './models/Post.js'
 // eslint-disable-next-line no-unused-vars
 import { Ad } from './models/Ad.js'
+import { Profile } from './models/Profile.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -14,7 +15,7 @@ export const AppState = reactive({
   posts: [],
   /** @type {Ad[]} */
   ads: [],
- 
+ /**@type {Profile} */
   activeProfile: null
 })
 

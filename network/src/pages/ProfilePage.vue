@@ -1,11 +1,13 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { profileService } from '@/services/ProfilesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
+const profile = computed(() => AppState.activeProfile)
 
 watch(() => route.params.profileId, () => {
   getProfileById()
@@ -27,6 +29,7 @@ async function getProfileById() {
 
 
 <template>
+  {{ profile }}
   <h1>Profile Page</h1>
 </template>
 
