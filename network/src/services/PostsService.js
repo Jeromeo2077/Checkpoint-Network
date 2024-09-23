@@ -9,6 +9,9 @@ class PostsService {
  AppState.posts = []
  const response = await api.get(`api/posts?creatorId=${profileId}`)
  logger.log(response.data)
+
+ const newPosts = response.data.posts.map(postPojo => new Post(postPojo))
+ AppState.posts = newPosts
   }
 
   async getAllPosts() {

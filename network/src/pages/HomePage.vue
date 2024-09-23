@@ -9,7 +9,6 @@ import { adsService } from '@/services/AdsService.js';
 import { accountService } from '@/services/AccountService.js';
 
 const posts = computed(() => AppState.posts)
-
 const ads = computed(() => AppState.ads)
 
 onMounted(() => {

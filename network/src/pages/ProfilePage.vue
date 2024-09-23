@@ -80,6 +80,10 @@ async function getAds() {
         <a class="mx-3" :href="profile.github">GitHub</a>
         <a class="mx-3" :href="profile.linkedin">LinkedIn</a>
       </div>
+      <h1 class="m-3">Recent Posts</h1>
+      <div class="col-md-12" v-for="post in posts" :key="post.id">
+        <PostCard :postProp="post" />
+      </div>
       <div class="col-md-12 mt-3" v-for="ad in ads" :key="ad.title">
         <AdCard :adProp="ad" />
       </div>
