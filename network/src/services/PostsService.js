@@ -4,6 +4,13 @@ import { Post } from "@/models/Post.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+
+ async deletePost(postId) {
+    const response = await api.delete(`api/posts/${postId}`)
+    logger.log('Deleted Post', response.data)
+    const postIndex = AppState.posts.findIndex(post => post.id == postId)
+    AppState.posts.splice(postIndex, 1)
+  }
  async createPost(postData) {
    const response = await api.post('api/posts', postData)
    const newPost = new Post(response.data)

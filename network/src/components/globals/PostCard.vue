@@ -1,12 +1,32 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Post } from '@/models/Post.js';
+import { postsService } from '@/services/PostsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
+const account = computed(() => AppState.account)
 
-defineProps({
+const props = defineProps({
   postProp: { type: Post, required: true }
 })
+
+async function deletePost() {
+  try {
+    const wantsToDelete = await Pop.confirm(`Are you sure that you would like to delete this post?`)
+
+    if (!wantsToDelete) { return }
+
+    await postsService.deletePost(props.postProp.id)
+  }
+  catch (error) {
+    Pop.meow(error)
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -25,7 +45,9 @@ defineProps({
       <h6 class="mb-3">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
         postProp.createdAt.toLocaleTimeString() }}</h6>
       <i class="mdi mdi-heart-outline mx-3">{{ postProp.likes.length }}</i>
-
+      <button v-if="postProp.creatorId == account?.id" @click="deletePost()" class="btn btn-danger" type="button">
+        Delete Post
+      </button>
     </div>
     <p class="card-text">{{ postProp.body.slice(0, 300) }}</p>
     <div class="card-body">
