@@ -18,7 +18,7 @@ defineProps({
       <router-link v-if="route.name == 'Home'"
         :to="{ name: 'ProfileDetails', params: { profileId: postProp.creatorId } }"
         :title="`Visit ${postProp.creator.name}'s Profile Page!`">
-        <img class="profile-img m-2" :src="postProp.creator.picture" :alt="postProp.creator.name">
+        <img class="profile-img m-2" :src="postProp.creator.picture" :alt="`${postProp.creator.name}'s image`">
       </router-link>
     </div>
     <div class="d-flex">

@@ -12,8 +12,6 @@ const posts = computed(() => AppState.posts)
 
 const ads = computed(() => AppState.ads)
 
-const account = computed(() => AppState.account)
-
 onMounted(() => {
   getAllPosts()
 })
