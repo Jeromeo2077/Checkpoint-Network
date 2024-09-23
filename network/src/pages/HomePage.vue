@@ -67,7 +67,7 @@ async function getAllPosts() {
     <div class="col-md-12" v-for="post in posts" :key="post.id">
       <PostCard :postProp="post" />
     </div>
-    <div class="col-md-3" v-for="ad in ads" :key="ad.title">
+    <div class="col-md-12" v-for="ad in ads" :key="ad.title">
       <AdCard :adProp="ad" />
     </div>
   </div>

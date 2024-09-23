@@ -29,7 +29,8 @@ defineProps({
     </div>
     <p class="card-text">{{ postProp.body.slice(0, 300) }}</p>
     <div class="card-body">
-      <img :src="postProp.imgUrl" class="card-img-top img-fluid rounded post-card-img" :alt="postProp.body">
+      <img v-if="postProp.imgUrl" :src="postProp.imgUrl" class="card-img-top img-fluid rounded post-card-img"
+        :alt="postProp.body">
     </div>
   </div>
 
