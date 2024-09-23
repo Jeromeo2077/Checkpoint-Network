@@ -4,6 +4,13 @@ import { Post } from "@/models/Post.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+
+ async getPostsByProfileId(profileId) {
+ AppState.posts = []
+ const response = await api.get(`api/posts?creatorId=${profileId}`)
+ logger.log(response.data)
+  }
+
   async getAllPosts() {
   const response = await api.get('api/posts')
   logger.log(response.data)

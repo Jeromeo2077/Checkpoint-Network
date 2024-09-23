@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { adsService } from '@/services/AdsService.js';
+import { postsService } from '@/services/PostsService.js';
 import { profileService } from '@/services/ProfilesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -10,6 +11,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const ads = computed(() => AppState.ads)
+const posts = computed(() => AppState.posts)
 
 onMounted(() => {
   getAds()
@@ -17,6 +19,7 @@ onMounted(() => {
 
 watch(() => route.params.profileId, () => {
   getProfileById()
+  getPostsByProfileId()
 }, { immediate: true })
 
 
@@ -24,6 +27,17 @@ async function getProfileById() {
   try {
     const profileId = route.params.profileId
     await profileService.getProfileById(profileId)
+  }
+  catch (error) {
+    Pop.meow(error)
+    logger.error(error)
+  }
+}
+
+async function getPostsByProfileId() {
+  try {
+    const profileId = route.params.profileId
+    await postsService.getPostsByProfileId(profileId)
   }
   catch (error) {
     Pop.meow(error)
