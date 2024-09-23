@@ -73,7 +73,7 @@ async function getAds() {
       </div>
       <div class="m-3">
         <p>Class: {{ profile.class }}</p>
-        <p>Graduated: {{ profile.graduated }}</p>
+        <p>Graduated: {{ profile.graduated ? 'Yes' : 'No' }}</p>
       </div>
       <div>
         <p class="m-3 mb-1 text-decoration-underline">Social Media</p>
