@@ -17,7 +17,7 @@ defineProps({
       <h5 class="card-name m-2"> {{ postProp.creator.name }}</h5>
       <router-link v-if="route.name == 'Home'"
         :to="{ name: 'ProfileDetails', params: { profileId: postProp.creatorId } }"
-        :title="`Visit ${postProp.creator.name}'s Profile Page!`">
+        :title="`Visit ${postProp.creator.name}'s Profile Page!`" target="_blank">
         <img class="profile-img m-2" :src="postProp.creator.picture" :alt="`${postProp.creator.name}'s image`">
       </router-link>
     </div>
