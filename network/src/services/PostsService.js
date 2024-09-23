@@ -4,6 +4,11 @@ import { Post } from "@/models/Post.js"
 import { AppState } from "@/AppState.js"
 
 class PostsService {
+ async createPost(postData) {
+   const response = await api.post('api/posts', postData)
+   const newPost = new Post(response.data)
+   AppState.posts.unshift(newPost)
+  }
 
  async getPostsByProfileId(profileId) {
  AppState.posts = []
