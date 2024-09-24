@@ -31,6 +31,8 @@ async function deletePost() {
 
 async function toggleLike() {
   try {
+    if (account.value == null) { return }
+
     await postsService.toggleLike(props.postProp.id)
   }
   catch (error) {
