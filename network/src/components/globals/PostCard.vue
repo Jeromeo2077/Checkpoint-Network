@@ -32,7 +32,7 @@ async function deletePost() {
 
 
 <template>
-  <div class="card box-shadow  m-3">
+  <div class="card box-shadow  m-3 p-3">
     <div class="d-flex justify-content-between">
       <h5 class="card-name m-2"> {{ postProp.creator.name }}</h5>
       <router-link v-if="route.name == 'Home'"
@@ -42,14 +42,14 @@ async function deletePost() {
       </router-link>
     </div>
     <div class="d-flex">
-      <h6 class="mb-3">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
+      <h6 class="mb-3 text-center">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
         postProp.createdAt.toLocaleTimeString() }}</h6>
       <i class="mdi mdi-heart-outline mx-3">{{ postProp.likes.length }}</i>
       <button v-if="postProp.creatorId == account?.id" @click="deletePost()" class="btn btn-danger" type="button">
         Delete Post
       </button>
     </div>
-    <p class="card-text">{{ postProp.body.slice(0, 300) }}</p>
+    <p class="card-text mt-3">{{ postProp.body.slice(0, 300) }}</p>
     <div class="card-body">
       <img v-if="postProp.imgUrl" :src="postProp.imgUrl" class="card-img-top img-fluid rounded post-card-img"
         :alt="postProp.body">
