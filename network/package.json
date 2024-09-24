@@ -11,6 +11,7 @@
   "type": "module",
   "dependencies": {
     "@bcwdev/auth0provider-client": "0.1.12",
+    "@material/icon-button": "^14.0.0",
     "@mdi/font": "7.4.47",
     "@popperjs/core": "2.11.8",
     "axios": "1.7.4",

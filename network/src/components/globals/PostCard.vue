@@ -7,6 +7,7 @@ import Pop from '@/utils/Pop.js';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
+
 const route = useRoute()
 const account = computed(() => AppState.account)
 
@@ -28,6 +29,16 @@ async function deletePost() {
   }
 }
 
+async function toggleLike() {
+  try {
+    await postsService.toggleLike(props.postProp.id)
+  }
+  catch (error) {
+    Pop.meow(error)
+    logger.log(error)
+  }
+}
+
 </script>
 
 
@@ -44,8 +55,10 @@ async function deletePost() {
     <div class="d-flex">
       <h6 class="mb-3 text-center">Last Activity: {{ postProp.createdAt.toLocaleDateString() }} {{
         postProp.createdAt.toLocaleTimeString() }}</h6>
-      <i class="mdi mdi-heart-outline mx-3">{{ postProp.likes.length }}</i>
-      <button v-if="postProp.creatorId == account?.id" @click="deletePost()" class="btn btn-danger" type="button">
+      <button class="btn btn-primary mx-2" @click="toggleLike()" type="button">
+        <i class="mdi mdi-heart-outline mx-3">{{ postProp.likes.length }}</i>
+      </button>
+      <button v-if="postProp.creatorId == account?.id" @click="deletePost()" class="btn btn-danger mx-2" type="button">
         Delete Post
       </button>
     </div>

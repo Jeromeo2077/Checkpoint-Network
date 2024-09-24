@@ -5,6 +5,11 @@ import { AppState } from "@/AppState.js"
 
 class PostsService {
 
+ async toggleLike(postId) {
+   const response = await api.post(`api/posts/${postId}/like`)
+   return response.data
+  }
+
  async deletePost(postId) {
     const response = await api.delete(`api/posts/${postId}`)
     logger.log('Deleted Post', response.data)
