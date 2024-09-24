@@ -105,8 +105,8 @@ async function getAds() {
         <p>Class: {{ profile.class }}</p>
         <p>Graduated: {{ profile.graduated ? 'Yes' : 'No' }}</p>
         <p class="m-3 mb-1 text-decoration-underline">Social Media</p>
-        <a class="m-3" :href="profile.github">GitHub</a>
-        <a class="m-3" :href="profile.linkedin">LinkedIn</a>
+        <a class="m-3" v-if="!editableAccountData.github" :href="profile.github">GitHub</a>
+        <a class="m-3" v-if="!editableAccountData.linkedin" :href="profile.linkedin">LinkedIn</a>
       </div>
       <div>
         <div class="m-3"></div>

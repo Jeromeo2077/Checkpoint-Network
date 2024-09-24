@@ -5,6 +5,13 @@ import { AppState } from "@/AppState.js"
 
 class PostsService {
 
+ async searchPosts(postQuery) {
+  const response = await api.get(`/api/posts?query=${postQuery}`)
+  logger.log(response.data)
+  const newPosts = response.data.posts.map(postPojo => new Post(postPojo))
+  AppState.posts = newPosts
+  }
+
  async toggleLike(postId) {
    const response = await api.post(`api/posts/${postId}/like`)
    return response.data
