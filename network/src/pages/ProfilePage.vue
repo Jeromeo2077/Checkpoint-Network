@@ -1,21 +1,41 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { accountService } from '@/services/AccountService.js';
 import { adsService } from '@/services/AdsService.js';
 import { postsService } from '@/services/PostsService.js';
 import { profileService } from '@/services/ProfilesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const ads = computed(() => AppState.ads)
 const posts = computed(() => AppState.posts)
+const account = computed(() => AppState.account)
+
+const editableAccountData = ref({
+  email: '',
+  name: '',
+  picture: '',
+  bio: '',
+  coverImg: '',
+  github: '',
+  linkedin: '',
+  resume: '',
+  class: '',
+  graduated: false
+})
+
+onMounted(() => {
+  editableAccountData.value = { ...AppState.activeProfile }
+})
 
 onMounted(() => {
   getAds()
 })
+
 
 watch(() => route.params.profileId, () => {
   getProfileById()
@@ -42,6 +62,16 @@ async function getPostsByProfileId() {
   catch (error) {
     Pop.meow(error)
     logger.error(error)
+  }
+}
+
+async function updateAccount() {
+  try {
+    await accountService.updateAccount(editableAccountData.value)
+  }
+  catch (error) {
+    Pop.meow(error)
+    logger.log(error)
   }
 }
 
@@ -80,6 +110,64 @@ async function getAds() {
         <a class="mx-3" :href="profile.github">GitHub</a>
         <a class="mx-3" :href="profile.linkedin">LinkedIn</a>
       </div>
+
+      <form v-if="account.id == profile?.id" @submit.prevent="updateAccount()">
+        <div class="mb-3">
+          <label for="accountEmail" class=" form-label">Account Email</label>
+          <input v-model="editableAccountData.email" type="text" name="accountEmail" id="accountEmail"
+            class="form-control" maxlength="500">
+        </div>
+        <div class="mb-3">
+          <label for="accountName" class="form-label">Account Name</label>
+          <input v-model="editableAccountData.name" type="text" name="accountName" id="accountName" class="form-control"
+            maxlength="100">
+        </div>
+        <div class="mb-3">
+          <label for="accountPicture" class="form-label">Account Picture</label>
+          <input v-model="editableAccountData.picture" type="url" name="accountPicture" id="accountPicture"
+            class="form-control" maxlength="500">
+        </div>
+        <div class="mb-3">
+          <label for="accountBio" class="form-label">Account Bio</label>
+          <textarea v-model="editableAccountData.bio" name="accountBio" id="accountBio" class="form-control"
+            maxlength="1000"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="accountCoverImg" class="form-label">Account CoverImg</label>
+          <input v-model="editableAccountData.coverImg" type="url" name="accountCoverImg" id="accountCoverImg"
+            class="form-control" maxlength="500"
+            default="https://images.unsplash.com/photo-1586829135343-132950070391?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80">
+        </div>
+        <div class="mb-3">
+          <label for="accountGithub" class="form-label">Account Github</label>
+          <input v-model="editableAccountData.github" type="url" name="accountGithub" id="accountGithub"
+            class="form-control" maxlength="500">
+        </div>
+        <div class="mb-3">
+          <label for="accountLinkedin" class="form-label">Account Linkedin</label>
+          <input v-model="editableAccountData.linkedin" type="url" name="accountLinkedin" id="accountLinkedin"
+            class="form-control" maxlength="500">
+        </div>
+        <div class="mb-3">
+          <label for="accountResume" class="form-label">Account Resume</label>
+          <input v-model="editableAccountData.resume" type="url" name="accountResume" id="accountResume"
+            class="form-control" maxlength="500">
+        </div>
+        <div class="mb-3">
+          <label for="accountClass" class=" form-label">Account Class</label>
+          <input v-model="editableAccountData.class" type="text" name="accountClass" id="accountClass"
+            class="form-control" maxlength="100">
+        </div>
+        <div class="mb-3">
+          <label for="accountGraduated" class="form-label me-3">Have You Graduated?</label>
+          <input v-model="editableAccountData.graduated" type="checkbox" name="accountGraduated" id="accountGraduated">
+        </div>
+        <div>
+          <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+      </form>
+
+
       <h1 class="m-3">Recent Posts</h1>
       <div class="col-md-12" v-for="post in posts" :key="post.id">
         <PostCard :postProp="post" />
